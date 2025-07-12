@@ -125,6 +125,25 @@ This ensures code quality and prevents regressions.
 If the change is only documentation or minor styling, tests may not be
 necessary.
 
+## Branch Retention Policy
+
+We value a complete and transparent Git history. To support this, merged
+branches are **not deleted by default**, including `feature/*`, `fix/*`, and
+other topic branches.
+
+### Rationale
+
+- ✅ Allows full traceability of past work.
+- ✅ Makes it easy to revisit the context of specific changes.
+- ✅ Ensures a clear history aligned with the Git Flow model.
+
+### Merge Strategy
+
+We use the **Merge commit** strategy when merging pull requests. This retains
+the full history of commits and clearly shows when branches were integrated.\
+If a pull request contains a single commit, we still use a merge commit to keep
+a consistent project history.
+
 ---
 
 Thank you for helping us keep the project clean and organized!
