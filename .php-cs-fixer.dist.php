@@ -9,10 +9,10 @@ $finder = Finder::create()
     ->in(__DIR__)
     ->name('*.php')
     ->notName('*.blade.php')
+    ->notName('_ide_helper*.php')
     ->exclude('vendor')
     ->exclude('storage')
-    ->exclude('bootstrap/cache')
-    ->exclude('tools');
+    ->exclude('bootstrap/cache');
 
 return (new Config())
     ->setRiskyAllowed(true)
