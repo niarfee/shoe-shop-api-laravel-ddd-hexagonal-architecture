@@ -24,5 +24,6 @@ Homestead.yaml
 Thumbs.db
 /coverage
 .php-cs-fixer.php
+.php-cs-fixer.cache
 _ide_helper.php
 _ide_helper_models.php

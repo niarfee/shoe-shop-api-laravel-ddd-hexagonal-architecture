@@ -60,6 +60,22 @@
             "@php artisan config:clear --ansi",
             "@php artisan test"
         ],
+        "php-cs-fixer": [
+            "INFO='                                                         '",
+            "INFO='========================================================='",
+            "INFO='===     PHP CS FIXER FIX (Only if APP_ENV=local)      ==='",
+            "INFO='========================================================='",
+            "INFO='                                                         '",
+            "APP_ENV=$(grep APP_ENV .env | cut -d '=' -f2) && [ \"$APP_ENV\" = \"local\" ] && PHP_CS_FIXER_IGNORE_ENV=1 vendor/bin/php-cs-fixer fix || echo 'Skipping php-cs-fixer: not in APP_ENV=local'"
+        ],
+        "php-cs-fixer-preview": [
+            "INFO='                                    '",
+            "INFO='===================================='",
+            "INFO='===     PHP CS FIXER PREVIEW     ==='",
+            "INFO='===================================='",
+            "INFO='                                    '",
+            "PHP_CS_FIXER_IGNORE_ENV=1 vendor/bin/php-cs-fixer fix --dry-run --diff"
+        ],
         "ide-helper": [
             "INFO='                                          '",
             "INFO='=========================================='",
