@@ -14,7 +14,9 @@
         "laravel/tinker": "^2.10.1"
     },
     "require-dev": {
+        "barryvdh/laravel-ide-helper": "^3.5",
         "fakerphp/faker": "^1.23",
+        "friendsofphp/php-cs-fixer": "^3.82",
         "laravel/pail": "^1.2.2",
         "laravel/pint": "^1.13",
         "laravel/sail": "^1.41",
@@ -57,6 +59,31 @@
         "test": [
             "@php artisan config:clear --ansi",
             "@php artisan test"
+        ],
+        "php-cs-fixer": [
+            "INFO='                                                         '",
+            "INFO='========================================================='",
+            "INFO='===     PHP CS FIXER FIX (Only if APP_ENV=local)      ==='",
+            "INFO='========================================================='",
+            "INFO='                                                         '",
+            "APP_ENV=$(grep APP_ENV .env | cut -d '=' -f2) && [ \"$APP_ENV\" = \"local\" ] && PHP_CS_FIXER_IGNORE_ENV=1 vendor/bin/php-cs-fixer fix || echo 'Skipping php-cs-fixer: not in APP_ENV=local'"
+        ],
+        "php-cs-fixer-preview": [
+            "INFO='                                    '",
+            "INFO='===================================='",
+            "INFO='===     PHP CS FIXER PREVIEW     ==='",
+            "INFO='===================================='",
+            "INFO='                                    '",
+            "PHP_CS_FIXER_IGNORE_ENV=1 vendor/bin/php-cs-fixer fix --dry-run --diff"
+        ],
+        "ide-helper": [
+            "INFO='                                          '",
+            "INFO='=========================================='",
+            "INFO='===     GENERATE IDE HELPER FILES      ==='",
+            "INFO='=========================================='",
+            "INFO='                                          '",
+            "php artisan ide-helper:generate",
+            "php artisan ide-helper:models -N"
         ]
     },
     "extra": {
