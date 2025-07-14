@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace Database\Seeders;
 
-use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use RuntimeException;
 
 class DatabaseSeeder extends Seeder
 {
@@ -15,11 +14,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        $env = app()->environment();
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        match ($env) {
+            'production' => $this->call(\Database\Seeders\Env\ProductionSeeder::class),
+            'staging'    => $this->call(\Database\Seeders\Env\StagingSeeder::class),
+            'local'      => $this->call(\Database\Seeders\Env\LocalSeeder::class),
+            'testing'    => throw new RuntimeException('We do not need seeders for testing as we are using the DatabaseTransactions trais.'),
+            'default' => throw new RuntimeException("Unknown environment '$env'."),
+        };
     }
 }
