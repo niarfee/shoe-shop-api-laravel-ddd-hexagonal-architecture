@@ -7,12 +7,14 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use Src\Shop\User\Domain\ValueObject\UserId;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
  */
 class UserFactory extends Factory
 {
+    protected $model = \Src\Shop\User\Infrastructure\Persistence\Eloquent\UserEloquentModel::class;
     /**
      * The current password being used by the factory.
      */
@@ -26,7 +28,8 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->name(),
+            'id' => UserId::generate()->value(),
+            'customer_id' => null,
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
