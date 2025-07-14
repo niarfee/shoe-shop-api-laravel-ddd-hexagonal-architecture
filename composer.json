@@ -11,7 +11,8 @@
     "require": {
         "php": "^8.2",
         "laravel/framework": "^12.0",
-        "laravel/tinker": "^2.10.1"
+        "laravel/tinker": "^2.10.1",
+        "symfony/uid": "^7.3"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^3.5",
@@ -60,6 +61,43 @@
         "test": [
             "@php artisan config:clear --ansi",
             "@php artisan test"
+        ],
+        "migrate:fresh:seed:local": [
+            "INFO='                                                                                      '",
+            "INFO='======================================================================================'",
+            "INFO='===     DROP ALL TABLES AND EXECUTE MIGRATIONS AND EXECUTE SEEDERS (env local)     ==='",
+            "INFO='======================================================================================'",
+            "INFO='                                                                                      '",
+            "php artisan migrate:fresh --env=local --path=database/migrations/shop/laravel --database=mysql-laravel --ansi",
+            "php artisan migrate:fresh --env=local --path=database/migrations/shop/shop --database=mysql-shop --ansi",
+            "php artisan db:seed --env=local --class='Database\\Seeders\\Env\\LocalSeeder' --ansi"
+        ],
+        "db:wipe:local": [
+            "INFO='                                                             '",
+            "INFO='============================================================='",
+            "INFO='===     DROP ALL TABLES, VIEWS, AND TYPES (env local)     ==='",
+            "INFO='============================================================='",
+            "INFO='                                                             '",
+            "php artisan db:wipe --env=local --database=mysql-shop --ansi",
+            "php artisan db:wipe --env=local --database=mysql-laravel --ansi"
+        ],
+        "migrate:fresh:testing": [
+            "INFO='                                                                    '",
+            "INFO='===================================================================='",
+            "INFO='===     DROP ALL TABLES AND EXECUTE MIGRATIONS (env testing)     ==='",
+            "INFO='===================================================================='",
+            "INFO='                                                                    '",
+            "php artisan migrate:fresh --env=testing --path=database/migrations/shop/laravel --database=mysql-laravel --ansi",
+            "php artisan migrate:fresh --env=testing --path=database/migrations/shop/shop --database=mysql-shop --ansi"
+        ],
+        "db:wipe:testing": [
+            "INFO='                                                               '",
+            "INFO='==============================================================='",
+            "INFO='===     DROP ALL TABLES, VIEWS, AND TYPES (env testing)     ==='",
+            "INFO='==============================================================='",
+            "INFO='                                                               '",
+            "php artisan db:wipe --env=testing --database=mysql-shop --ansi",
+            "php artisan db:wipe --env=testing --database=mysql-laravel --ansi"
         ],
         "php-cs-fixer": [
             "INFO='                                                         '",
