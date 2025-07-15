@@ -17,6 +17,7 @@ use Src\Shared\Domain\Exception\PasswordConfirmationDoesNotMatchException;
 use Src\Shop\Customer\Domain\Exception\DuplicateCustomerEmailException;
 use Src\Shop\ProductCategory\Domain\Exception\InvalidProductCategorySlugException;
 use Src\Shop\ProductCategory\Domain\Exception\NoProductCategoriesExistException;
+use Src\Shop\User\Domain\Exception\InvalidCredentialsException;
 use Throwable;
 
 final class ExceptionHttpStatusMapper
@@ -30,6 +31,7 @@ final class ExceptionHttpStatusMapper
             $e instanceof InvalidUuidException => HttpStatusEnum::NotFound,
             $e instanceof PasswordConfirmationDoesNotMatchException => HttpStatusEnum::UnprocessableEntity,
             $e instanceof DuplicateCustomerEmailException => HttpStatusEnum::Conflict,
+            $e instanceof InvalidCredentialsException => HttpStatusEnum::Unauthorized,
             $e instanceof EmptyPasswordException => HttpStatusEnum::BadRequest,
             $e instanceof NoProductCategoriesExistException => HttpStatusEnum::NotFound,
             $e instanceof InvalidEmailDomainException => HttpStatusEnum::UnprocessableEntity,
