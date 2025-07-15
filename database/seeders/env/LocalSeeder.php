@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Database\Seeders\Env;
 
 use Database\Seeders\Helpers\CustomerSeederHelper;
+use Database\Seeders\Helpers\OrderSeederHelper;
 use Database\Seeders\Helpers\ProductCategorySeederHelper;
 use Database\Seeders\Helpers\ProductSeederHelper;
 use Database\Seeders\Helpers\UserSeederHelper;
@@ -17,6 +18,7 @@ class LocalSeeder extends Seeder
         private UserSeederHelper $userSeederHelper,
         private ProductCategorySeederHelper $productCategorySeederHelper,
         private ProductSeederHelper $productSeederHelper,
+        private OrderSeederHelper $orderSeederHelper,
     ) {
     }
 
@@ -32,11 +34,18 @@ class LocalSeeder extends Seeder
             quantityProducts: 20,
             quantityRandomProductsVariants: [2, 3, 4, 5],
         );
+        $orders = $this->orderSeederHelper->buildFake(
+            customers: $customers,
+            products: $products,
+            quantityOrders: 3,
+            quantityRandomOrderLines: [1, 2, 3],
+        );
 
         $customersData = $this->customerSeederHelper->fromDomainListToArrayList($customers);
         $usersData = $this->userSeederHelper->fromDomainListToArrayList($users);
         $productCategoriesData = $this->productCategorySeederHelper->fromDomainListToArrayList($productCategories);
         $productsData = $this->productSeederHelper->fromDomainListToArrayList($products);
+        $ordersData = $this->orderSeederHelper->fromDomainListToArrayList($orders);
 
         // PERSIST
 
@@ -44,5 +53,6 @@ class LocalSeeder extends Seeder
         $this->userSeederHelper->persistList($usersData);
         $this->productCategorySeederHelper->persistList($productCategoriesData);
         $this->productSeederHelper->persistList($productsData);
+        $this->orderSeederHelper->persistList($ordersData);
     }
 }
