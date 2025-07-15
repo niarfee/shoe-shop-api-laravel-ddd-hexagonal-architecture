@@ -1,61 +1,148 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+## Requirements 📋
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+- Docker 🐳
+- Git 📚
 
-## About Laravel
+## Project Installation 🚀
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### Clone or download the project ZIP from GitHub:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+```
+git clone https://github.com/niarfee/shoe-shop-api-laravel-ddd-hexagonal-architecture
+```
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Copy `.env.example` and rename it to `.env`:
 
-## Learning Laravel
+```
+cp .env.example .env
+```
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### Start Docker environment:
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+This will start four containers:
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- Laravel API Backend
+- MySQL database for Laravel (to manage the User, Token, and other tables used
+  by Laravel)
+- MySQL database for Shop (a decoupled DB with all the necessary domain tables)
+- phpMyAdmin (to manage the databases more conveniently locally)
 
-## Laravel Sponsors
+```
+docker compose up -d
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### Access the backend-laravel Docker container to execute the final installation commands:
 
-### Premium Partners
+```
+docker exec -it shoe-shop-api-laravel-ddd-hexagonal-architecture-backend-laravel-1 bash
+```
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+Once inside the container, run the following commands:
 
-## Contributing
+#### Install dependencies:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```
+composer install
+```
 
-## Code of Conduct
+#### Generate the application key:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```
+php artisan key:generate
+```
 
-## Security Vulnerabilities
+#### Run migrations and seeders (locally):
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```
+composer migrate:fresh:seed:local
+```
 
-## License
+## Run tests (locally):
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```
+php artisan test
+```
+
+## Access the database through phpMyAdmin:
+
+### URL:
+
+```
+http://localhost:8080/
+```
+
+### Laravel DB credentials (default):
+
+```
+server: db-mysql-laravel
+user: sail
+password: password
+```
+
+### Shop DB credentials (default):
+
+```
+server: db-mysql-shop
+user: sail
+password: password
+```
+
+## Useful tools for local development:
+
+### PHP CS Fixer:
+
+PHP CS Fixer (PHP Coding Standards Fixer) is a tool that automatically detects
+and fixes style and formatting issues in PHP code, following standards such as
+PSR-12 or custom rules.
+
+#### Copy `.php-cs-fixer.dist.php` and rename it to `.php-cs-fixer.php`, where all style and formatting rules for the project are defined:
+
+```
+cp .php-cs-fixer.dist.php .php-cs-fixer.php
+```
+
+#### Run PHP CS Fixer manually:
+
+```
+PHP_CS_FIXER_IGNORE_ENV=1 vendor/bin/php-cs-fixer fix
+```
+
+#### Run PHP CS Fixer manually (with preview):
+
+```
+PHP_CS_FIXER_IGNORE_ENV=1 vendor/bin/php-cs-fixer fix --dry-run --diff
+```
+
+#### Run PHP CS Fixer automatically on file save:
+
+Using the `junstyle.php-cs-fixer` extension for Visual Studio Code, you can
+automatically run PHP CS Fixer when saving a file.
+
+1. Install the `junstyle.php-cs-fixer` extension for Visual Studio Code
+2. Add the following configuration to `settings.json` in Visual Studio Code:
+
+   ```
+   "php-cs-fixer.onsave": true,
+   "php-cs-fixer.executablePath": "${workspaceFolder}/vendor/bin/php-cs-fixer",
+   "php-cs-fixer.config": ".php-cs-fixer.php;.php-cs-fixer.dist.php",
+   "php-cs-fixer.ignorePHPVersion": true,
+   ```
+
+### Laravel IDE Helper
+
+#### Install Laravel IDE Helper:
+
+```
+composer require --dev barryvdh/laravel-ide-helper
+```
+
+#### Generate helper files for the IDE:
+
+This command automatically generates the `_ide_helper.php` and
+`_ide_helper_models.php` files to enhance the development experience in your
+IDE. Run it manually each time you want to generate the files with the current
+project code.
+
+```
+composer ide-helper
+```
