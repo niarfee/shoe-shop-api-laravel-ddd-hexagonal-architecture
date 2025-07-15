@@ -10,10 +10,10 @@ final class InvalidStringLengthException extends BaseDomainException
 {
     public function __construct(
         int $minLength,
-        int $maxLength
+        int $maxLength,
     ) {
         parent::__construct(
-            sprintf('The length must be between <%d> and <%d> characters.', $minLength, $maxLength)
+            sprintf('The length must be between <%d> and <%d> characters.', $minLength, $maxLength),
         );
     }
 }
