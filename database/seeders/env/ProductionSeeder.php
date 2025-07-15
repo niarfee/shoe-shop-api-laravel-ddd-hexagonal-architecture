@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Database\Seeders\Env;
 
 use Database\Seeders\Helpers\CustomerSeederHelper;
+use Database\Seeders\Helpers\OrderSeederHelper;
 use Database\Seeders\Helpers\ProductCategorySeederHelper;
 use Database\Seeders\Helpers\ProductSeederHelper;
 use Database\Seeders\Helpers\UserSeederHelper;
@@ -17,6 +18,7 @@ class ProductionSeeder extends Seeder
         private UserSeederHelper $userSeederHelper,
         private ProductCategorySeederHelper $productCategorySeederHelper,
         private ProductSeederHelper $productSeederHelper,
+        private OrderSeederHelper $orderSeederHelper,
     ) {
     }
 
@@ -245,6 +247,86 @@ class ProductionSeeder extends Seeder
                 ],
             ],
         ];
+        $ordersData = [
+            [
+                'id' => '01977a0b-930d-78e2-ae85-c32b763d3f22',
+                'customer_id' => '01977167-a5f3-782a-aac4-99b0199ae28a',
+                'status' => 1,
+                'total_price' => '444.97',
+                'created_at' => '2025-06-16 18:41:08',
+                'updated_at' => '2025-06-16 18:41:08',
+                'lines' => [
+                    [
+                        'id' => '01977a0b-9407-76aa-bebe-384241d144b1',
+                        'product_variant_id' => '019773f3-4a3e-7a8d-8617-a918f3648505',
+                        'units' => '5',
+                        'unit_price' => '75.52',
+                        'created_at' => '2025-06-16 18:41:08',
+                        'updated_at' => '2025-06-16 18:41:08',
+                    ],
+                    [
+                        'id' => '01977a0b-9407-76aa-bebe-38424266f2fc',
+                        'product_variant_id' => '019773f3-4a40-7b7a-876c-ed59d6e3f5c9',
+                        'units' => '1',
+                        'unit_price' => '67.37',
+                        'created_at' => '2025-06-16 18:41:08',
+                        'updated_at' => '2025-06-16 18:41:08',
+                    ],
+                ],
+            ],
+            [
+                'id' => '01977a0b-9408-777c-8265-6cb08adec110',
+                'customer_id' => '01977167-a5f3-782a-aac4-99b01a14f0ef',
+                'status' => 1,
+                'total_price' => '96.08',
+                'created_at' => '2025-06-16 18:41:08',
+                'updated_at' => '2025-06-16 18:41:08',
+                'lines' => [
+                    [
+                        'id' => '01977a0b-9408-777c-8265-6cb08b91cad1',
+                        'product_variant_id' => '019773f3-4a3d-707a-b434-9f41b59bb7ff',
+                        'units' => '2',
+                        'unit_price' => '48.04',
+                        'created_at' => '2025-06-16 18:41:08',
+                        'updated_at' => '2025-06-16 18:41:08',
+                    ],
+                ],
+            ],
+            [
+                'id' => '01977a0b-9408-777c-8265-6cb08c02f555',
+                'customer_id' => '01977167-a5f3-782a-aac4-99b01a14f0ef',
+                'status' => 2,
+                'total_price' => '337.68',
+                'created_at' => '2025-06-16 18:41:08',
+                'updated_at' => '2025-06-16 18:41:08',
+                'lines' => [
+                    [
+                        'id' => '01977a0b-9408-777c-8265-6cb08c796602',
+                        'product_variant_id' => '019773f3-4a42-724e-90b1-a29ac2346e28',
+                        'units' => '7',
+                        'unit_price' => '6.25',
+                        'created_at' => '2025-06-16 18:41:08',
+                        'updated_at' => '2025-06-16 18:41:08',
+                    ],
+                    [
+                        'id' => '01977a0b-9408-777c-8265-6cb08d70a8a1',
+                        'product_variant_id' => '019773f3-4a3e-7a8d-8617-a918f3648505',
+                        'units' => '3',
+                        'unit_price' => '75.52',
+                        'created_at' => '2025-06-16 18:41:08',
+                        'updated_at' => '2025-06-16 18:41:08',
+                    ],
+                    [
+                        'id' => '01977a0b-9408-777c-8265-6cb08d7e8370',
+                        'product_variant_id' => '019773f3-4a41-71e2-a423-d5e0645bca5f',
+                        'units' => '1',
+                        'unit_price' => '67.37',
+                        'created_at' => '2025-06-16 18:41:08',
+                        'updated_at' => '2025-06-16 18:41:08',
+                    ],
+                ],
+            ],
+        ];
 
         // PERSIST
 
@@ -252,5 +334,6 @@ class ProductionSeeder extends Seeder
         $this->userSeederHelper->persistList($usersData);
         $this->productCategorySeederHelper->persistList($productCategoriesData);
         $this->productSeederHelper->persistList($productsData);
+        $this->orderSeederHelper->persistList($ordersData);
     }
 }
