@@ -17,6 +17,12 @@ git clone https://github.com/niarfee/shoe-shop-api-laravel-ddd-hexagonal-archite
 cp .env.example .env
 ```
 
+### Instalar dependencias:
+
+```
+./docker/composer install
+```
+
 ### Levantar entorno Docker:
 
 Con ello levantaremos cuatro contenedores:
@@ -29,7 +35,7 @@ Con ello levantaremos cuatro contenedores:
 - phpMyAdmin (para gestionar las bases de datos de forma más cómoda en local)
 
 ```
-docker compose up -d
+./docker/up
 ```
 
 ### Acceder al contenedor backend-laravel de Docker para poder ejecutar los últimos comandos de instalación:
@@ -39,12 +45,6 @@ docker exec -it shoe-shop-api-laravel-ddd-hexagonal-architecture-backend-laravel
 ```
 
 Una vez estamos dentro del contenedor, ejecutamos los siguientes comandos:
-
-#### Instalar dependencias:
-
-```
-composer install
-```
 
 #### Generar la clave de la aplicación:
 

@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+export WWWUSER=$(id -u "$(whoami)")
+export WWWGROUP=$(id -g "$(whoami)")
+
+docker compose up -d
